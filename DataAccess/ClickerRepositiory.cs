@@ -14,8 +14,15 @@ namespace ClickedIn.DataAccess
             {
                 Id = 1,
                 HoodName = "Big Pat",
-                ServiceType = Services.Coding,
-                Interests = Interests.Writing
+                Services = "Rapping",
+                Interests = "Wallstreet"
+            },
+            new Clicker
+            {
+                Id = 2,
+                HoodName = "C Black",
+                Services = "Robbin",
+                Interests = "Coding"
             }
         };
 
@@ -30,19 +37,10 @@ namespace ClickedIn.DataAccess
         {
             return _clickers;
         }
-        //Still a lil grey 
-        public List<Clicker> GetClickerByInterest(string Interest)
-        {
-            Interests interest;
 
-            if (Enum.TryParse(Interest, true, out interest))
-            {
-                if (Enum.IsDefined(typeof(Interests), interest) | interest.ToString().Contains(","))
-                {
-                    var filteredClickers = _clickers.Where(clicker => clicker.Interests == interest);
-                }
-            }
-            return "Test";
+        public Clicker GetClickerById(int id)
+        {
+            return _clickers.FirstOrDefault(clickerObj => clickerObj.Id == id);
         }
     }
 }

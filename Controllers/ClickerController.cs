@@ -23,20 +23,6 @@ namespace ClickedIn.Controllers
             return Created("", clickerToAdd);
         }
 
-        [HttpGet("{Id}/id")]
-        public IActionResult GetClinker(int Id)
-        {
-            return NotFound("In progress");
-        }
-
-        [HttpGet("{Interest}/interest")]
-        public IActionResult GetClickerByInterest(string Interest)
-        {
-            var testing = _repository.GetClickerByInterest(Interest);
-
-            return NotFound(testing);
-        }
-
         //Get all Clickers
         [HttpGet]
         public IActionResult GetAllClickers()
@@ -44,6 +30,15 @@ namespace ClickedIn.Controllers
             var allClickers = _repository.GetClickers();
 
             return Ok(allClickers);
+        }
+
+        //Get ClickerById
+        [HttpGet("{id}")]
+        public IActionResult GetClickerById(int id )
+        {
+            var clickerIWant = _repository.GetClickerById(id);
+            if (clickerIWant == null) return NotFound("They Gone Bruh");
+            return Ok(clickerIWant);
         }
     }
 }
